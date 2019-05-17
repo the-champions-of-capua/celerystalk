@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-PIP_SOURCE=http://pypi.douban.com/simple
+PIP_SOURCE=http://mirrors.cn99.com/pypi/simple
 #PIP_SOURCE=https://pypi.tuna.tsinghua.edu.cn/simple
 
 #阿里：https://mirrors.aliyun.com/pypi/simple
+#网易：http://mirrors.cn99.com/pypi/simple
 #豆瓣：http://pypi.douban.com/simple/
 #清华大学：https://pypi.tuna.tsinghua.edu.cn/simple
 #中国科学技术大学： https://pypi.mirrors.ustc.edu.cn/simple
@@ -42,22 +43,7 @@ echo ""
 if [ "$DISTRO" == "kali" ]; then
     apt install gobuster redis-server seclists firefox-esr xvfb python3-pip wpscan jq -y
 elif [ "$DISTRO" == "ubuntu" ]; then
-    mv /etc/apt/sources.list /etc/apt/sources.list.bak && cat > /etc/apt/sources.list <<- EOF
-deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
-EOF
     apt install python-pip unzip redis-server firefox xvfb jq curl -y
-    apt-get install software-properties-common && add-apt-repository ppa:jonathonf/python-3.6 && \
-    apt-get -y update && apt-get install python-3.6 -y && \
-    apt-get install -y python3-pip
 fi
 
 CELERYSTALK_DIR=`pwd`
