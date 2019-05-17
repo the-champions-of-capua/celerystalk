@@ -18,8 +18,12 @@ def query_sqlite(workspace, target=None, repeat=None, summary=None):
     cancelled_rows = db.get_cancelled_tasks(workspace)
     paused_rows = db.get_paused_tasks(workspace)
 
-    loadavg = float("{0:.1f}".format(os.getloadavg()[0]))
-    banner = "celerystalk Status | Workspace Name: {0}  | CPU Load Avg: {1}".format(workspace,loadavg)
+    # loadavg = float("{0:.1f}".format(os.getloadavg()[0]))
+    try:
+        loadavg = float("%.2f" % os.popen("uptime | sed 's/,//g' | awk '{print $8,$9,$10}'").read().strip().split(" ")[0] )
+    except TypeError:
+        loadavg = float('0.00')
+    banner = "celerystalk Status | Workspace Name: {0}  | CPU Load Avg: {1}".format(workspace, loadavg)
     print("*" * terminal_width)
     print(" " * ((terminal_width / 2) - (len(banner) / 2)) + banner)
     print("\n" + " " * ((terminal_width / 2) - 40) + "Submitted: {0} | Queued: {3} | Running: {2} | Completed: {1}  | Cancelled: {4}  | Paused: {5}".format(total_count[0][0], completed_count[0][0], len(running_rows), pending_count[0][0], len(cancelled_rows), len(paused_rows)))

@@ -16,11 +16,15 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted univer
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
 EOF
 
+RUN apt-get install wget unzip curl git -y
 RUN apt-get install software-properties-common -y && \
 add-apt-repository ppa:jonathonf/python3.6 && \
 apt-get -y update && apt-get install python3.6 -y
 
-RUN apt-get update -qq && apt-get install -y nmap redis
+RUN rm /usr/bin/python3 && ln -sn /usr/bin/python3.6 /usr/bin/python3
+RUN cd ${WORKDIR} && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && python get-pip.py
+
+RUN apt-get update -qq && apt-get install -y nmap redis-server
 
 RUN cd ${WORKDIR} && git clone https://github.com/the-champions-of-capua/celerystalk \
  && cd celerystalk/setup && ./install.sh

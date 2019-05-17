@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-PIP_SOURCE=http://mirrors.cn99.com/pypi/simple
-#PIP_SOURCE=https://pypi.tuna.tsinghua.edu.cn/simple
 
 #阿里：https://mirrors.aliyun.com/pypi/simple
 #网易：http://mirrors.cn99.com/pypi/simple
@@ -57,10 +55,10 @@ echo ""
 
 echo ""
 echo "******************************************"
-echo "* Installing python requirements via pip *"
+echo "* Installing python requirements via pip3 *"
 echo "******************************************"
 echo ""
-pip install -r requirements.txt --index-url ${PIP_SOURCE} --upgrade
+pip3 install -r requirements.txt
 
 
 if [ ! -f /usr/bin/nmap ]; then
@@ -138,14 +136,14 @@ if [ ! -f /opt/Sublist3r/sublist3r.py ]; then
     echo ""
 
     cd /opt/ && git clone https://github.com/aboul3la/Sublist3r.git && cd Sublist3r/
-    pip install -r requirements.txt --index-url ${PIP_SOURCE}
+    pip install -r requirements.txt
 else
     echo ""
     echo "**********************************************"
     echo "*           Updating sublist3r               *"
     echo "**********************************************"
     echo ""
-    cd /opt/Sublist3r/ && git pull && pip install -r requirements.txt --index-url ${PIP_SOURCE}
+    cd /opt/Sublist3r/ && git pull && pip install -r requirements.txt
 fi
 
 if [ ! -f /opt/Photon/photon.py ]; then
@@ -155,7 +153,7 @@ if [ ! -f /opt/Photon/photon.py ]; then
     echo "**********************************************"
     echo ""
     cd /opt/ && git clone https://github.com/s0md3v/Photon.git && cd Photon && \
-    pip install -r requirements.txt --index-url ${PIP_SOURCE}
+    pip install -r requirements.txt
 else
     echo ""
     echo "**********************************************"
@@ -163,7 +161,7 @@ else
     echo "**********************************************"
     echo ""
     cd /opt/Photon && git pull && \
-    pip install -r requirements.txt --index-url ${PIP_SOURCE}
+    pip install -r requirements.txt
 fi
 
 #if [ ! -f /opt/CMSmap/cmsmap.py ]; then
