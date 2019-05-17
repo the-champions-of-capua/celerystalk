@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PIP_SOURCE=https://pypi.tuna.tsinghua.edu.cn/simple
+
 DISTRO=`grep "^ID=" /etc/os-release | cut -d\= -f2`
 
 if [[ $EUID -ne 0 ]]; then
@@ -49,7 +51,7 @@ echo "******************************************"
 echo "* Installing python requirements via pip *"
 echo "******************************************"
 echo ""
-pip install -r requirements.txt --upgrade
+pip install -r requirements.txt --index-url ${PIP_SOURCE} --upgrade
 
 
 if [ ! -f /usr/bin/geckodriver ]; then
@@ -122,7 +124,7 @@ if [ ! -f /opt/Sublist3r/sublist3r.py ]; then
     cd /opt/
     git clone https://github.com/aboul3la/Sublist3r.git
     cd Sublist3r/
-    pip install -r requirements.txt
+    pip install -r requirements.txt --index-url ${PIP_SOURCE}
 else
     echo ""
     echo "**********************************************"
@@ -131,7 +133,7 @@ else
     echo ""
     cd /opt/Sublist3r/
     git pull
-    pip install -r requirements.txt
+    pip install -r requirements.txt --index-url ${PIP_SOURCE}
 fi
 
 if [ ! -f /opt/Photon/photon.py ]; then
@@ -143,7 +145,7 @@ if [ ! -f /opt/Photon/photon.py ]; then
     cd /opt/
     git clone https://github.com/s0md3v/Photon.git
     cd Photon
-    pip install -r requirements.txt
+    pip install -r requirements.txt --index-url ${PIP_SOURCE}
 else
     echo ""
     echo "**********************************************"
@@ -152,7 +154,7 @@ else
     echo ""
     cd /opt/Photon
     git pull
-    pip install -r requirements.txt
+    pip install -r requirements.txt --index-url ${PIP_SOURCE}
 fi
 
 #if [ ! -f /opt/CMSmap/cmsmap.py ]; then
