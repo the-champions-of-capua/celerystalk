@@ -44,10 +44,10 @@ def take_screenshot(urls_to_screenshot,task_id,ip,scan_output_base_file_dir, wor
             driver.get(url)
             print("Taking screenshot of [{0}]".format(url))
             screenshot = driver.save_screenshot(output)
-        except WebDriverException, e:
+        except WebDriverException as e:
             #print('exception: {0}'.format(e))
             print("Error taking screenshot of [{0}]".format(url))
-        except Exception, e:
+        except Exception as e:
             print('exception: {0}'.format(e))
             #print(type(e).__name__)
         # finally:
@@ -254,7 +254,7 @@ def target_splitter(target_networks):
                             # Putting this try/except here because i have a feeling that at some point we will see
                             # something like 192.168.0.0-192.168.200.255 or something like that.  Not handling that
                             # right now.
-                            print(error)
+                            print("error")
                 else:
                     # If there is no "-" in the line, we can deal with it as a simple network or IPAddress. Luckily
                     # IPNetwork automatically converts an IP without a CIDR into /32 CIDR, and it works just like
@@ -306,7 +306,7 @@ def check_for_new_default_config():
     if user_config_age < default_config_age:
         print("[!] [config_default.ini] from the repo is newer than the the current [config.ini] file.")
         print("[!] This is most likely because a new tool or possibly a new feature has been added.\n")
-        answer = raw_input("[+] Would you like backup your current config and replace [config.ini] with the new version? (y\N)")
+        answer = input("[+] Would you like backup your current config and replace [config.ini] with the new version? (y\N)")
         print("")
         if (answer == "Y") or (answer == "y"):
             from shutil import copyfile

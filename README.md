@@ -1,5 +1,8 @@
 # celerystalk
 
+## 更新到 PYTHON3
+- [主要更新内容和步骤](./UPDATE.md)
+
 celerystalk helps you automate your network scanning/enumeration process with asynchronous jobs (aka *tasks*) while retaining full control of which tools you want to run.    
 
 * **Configurable** - Some common tools are in the default config, but you can add any tool you want

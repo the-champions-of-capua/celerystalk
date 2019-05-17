@@ -8,7 +8,10 @@ from lib import db
 from lib import utils
 import lib.scan
 import simplejson
-import urlparse
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse
 import os.path
 from celery.utils import uuid
 import os
@@ -133,7 +136,7 @@ def post_process(*args):
                     urls_to_screenshot.append((url,url_screenshot_filename))
 
                     #result = lib.utils.take_screenshot(url,url_screenshot_filename)
-        except Exception, e:
+        except Exception:
             if not simulation:
                 print("[!] Could not open {0}".format(post_gobuster_filename))
 
@@ -185,7 +188,7 @@ def post_process(*args):
                             urls_to_screenshot.append((str(url), url_screenshot_filename))
 
 
-        except Exception, e:
+        except Exception:
             if not simulation:
                 print("[!] Could not open {0}".format(post_photon_filename))
 
