@@ -2,6 +2,13 @@
 
 PIP_SOURCE=https://pypi.tuna.tsinghua.edu.cn/simple
 
+#阿里：https://mirrors.aliyun.com/pypi/simple
+#豆瓣：http://pypi.douban.com/simple/
+#清华大学：https://pypi.tuna.tsinghua.edu.cn/simple
+#中国科学技术大学： https://pypi.mirrors.ustc.edu.cn/simple
+#华中理工大学： http://pypi.hustunique.com/simple
+#山东理工大学： http://pypi.sdutlinux.org/simple
+
 DISTRO=`grep "^ID=" /etc/os-release | cut -d\= -f2`
 
 if [[ $EUID -ne 0 ]]; then
@@ -54,6 +61,15 @@ echo ""
 pip install -r requirements.txt --index-url ${PIP_SOURCE} --upgrade
 
 
+if [ ! -f /usr/bin/nmap ]; then
+    echo ""
+    echo "**************************************"
+    echo "*    Installing Nmap          *"
+    echo "**************************************"
+    echo ""
+    apt-get install nmap -y
+fi
+
 if [ ! -f /usr/bin/geckodriver ]; then
     echo ""
     echo "**************************************"
@@ -75,7 +91,6 @@ if [ ! -f /usr/bin/geckodriver ]; then
       mv geckodriver /usr/sbin
       ln -s /usr/sbin/geckodriver /usr/bin/geckodriver
     fi
-
 
     # https://gist.github.com/cgoldberg/4097efbfeb40adf698a7d05e75e0ff51#file-geckodriver-install-sh
     install_dir="/usr/bin"
@@ -111,7 +126,6 @@ fi
      wget https://github.com/michenriksen/aquatone/releases/download/v1.4.3/aquatone_linux_amd64_1.4.3.zip -O /opt/aquatone/aquatone_linux_amd64_1.4.3.zip
      unzip /opt/aquatone/aquatone_linux_amd64_1.4.3.zip -d /opt/aquatone
  fi
-
 
 
 if [ ! -f /opt/Sublist3r/sublist3r.py ]; then
@@ -157,28 +171,28 @@ else
     pip install -r requirements.txt --index-url ${PIP_SOURCE}
 fi
 
-#if [ ! -f /opt/CMSmap/cmsmap.py ]; then
-#    echo ""
-#    echo "**********************************************"
-#    echo "* Installing CMSmap to /opt/CMSmap/cmsmap.py *"
-#    echo "**********************************************"
-#    echo ""
-#    cd /opt/
-#    git clone https://github.com/Dionach/CMSmap.git
-#    cd CMSmap
-#    pip3 install .
-#    echo "y" | cmsmap -U P
-#else
-#    echo ""
-#    echo "**********************************************"
-#    echo "*           Updating CMSmap                  *"
-#    echo "**********************************************"
-#    echo ""
-#    cd /opt/CMSmap
-#    git pull
-#    pip3 install .
-#    echo "y" | cmsmap -U P
-#fi
+if [ ! -f /opt/CMSmap/cmsmap.py ]; then
+    echo ""
+    echo "**********************************************"
+    echo "* Installing CMSmap to /opt/CMSmap/cmsmap.py *"
+    echo "**********************************************"
+    echo ""
+    cd /opt/
+    git clone https://github.com/Dionach/CMSmap.git
+    cd CMSmap
+    pip3 install .
+    echo "y" | cmsmap -U P
+else
+    echo ""
+    echo "**********************************************"
+    echo "*           Updating CMSmap                  *"
+    echo "**********************************************"
+    echo ""
+    cd /opt/CMSmap
+    git pull
+    pip3 install .
+    echo "y" | cmsmap -U P
+fi
 
 cd $CELERYSTALK_DIR
 cp bash_completion_file /etc/bash_completion.d/celerystalk.sh
