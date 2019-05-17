@@ -7,10 +7,7 @@ from celery.utils import uuid
 from celery import chain
 import socket
 import re
-try:
-    import urlparse
-except:
-    import urllib.parse as urlparse
+import urllib.parse as urlparse
 import lib.db
 from random import shuffle
 

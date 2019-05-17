@@ -23,7 +23,7 @@ def query_sqlite(workspace, target=None, repeat=None, summary=None):
         loadavg = float("%.2f" % os.popen("uptime | sed 's/,//g' | awk '{print $8,$9,$10}'").read().strip().split(" ")[0] )
     except TypeError:
         loadavg = float('0.00')
-    banner = "celerystalk Status | Workspace Name: {0}  | CPU Load Avg: {1}".format(workspace, loadavg)
+    banner = "celerystalk Status | Workspace Name: {0}  | CPU Load Avg: {1}".format(workspace, str(loadavg))
     print("*" * terminal_width)
     print(" " * ((terminal_width / 2) - (len(banner) / 2)) + banner)
     print("\n" + " " * ((terminal_width / 2) - 40) + "Submitted: {0} | Queued: {3} | Running: {2} | Completed: {1}  | Cancelled: {4}  | Paused: {5}".format(total_count[0][0], completed_count[0][0], len(running_rows), pending_count[0][0], len(cancelled_rows), len(paused_rows)))
@@ -86,7 +86,6 @@ def query_sqlite(workspace, target=None, repeat=None, summary=None):
         if repeat:
             if len(cancelled_rows_orig) > 5:
                 print("  +{0} more rows".format(len(cancelled_rows_orig) - 5))
-
 
 
     if pending_rows.__len__() > 0:

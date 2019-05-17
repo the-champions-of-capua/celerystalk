@@ -5,10 +5,7 @@ import sys
 import lib.db
 import lib.utils
 from lib import db
-try:
-    import urlparse
-except:
-    from urllib import parse as urlparse
+from urllib import parse as urlparse
 import os
 import csv
 
@@ -411,9 +408,6 @@ def process_qualys_data(qualys_port_services,workspace,target=None):
                         db.create_service(db_string)
                     else:
                         db.update_service(vhost, port, protocol, service, workspace)
-
-
-
 
 
 def process_nmap_data(nmap_report,workspace, target=None):
