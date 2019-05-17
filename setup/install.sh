@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-PIP_SOURCE=https://pypi.tuna.tsinghua.edu.cn/simple
+PIP_SOURCE=http://pypi.douban.com/simple
+#PIP_SOURCE=https://pypi.tuna.tsinghua.edu.cn/simple
 
 #阿里：https://mirrors.aliyun.com/pypi/simple
 #豆瓣：http://pypi.douban.com/simple/
@@ -171,28 +171,28 @@ else
     pip install -r requirements.txt --index-url ${PIP_SOURCE}
 fi
 
-if [ ! -f /opt/CMSmap/cmsmap.py ]; then
-    echo ""
-    echo "**********************************************"
-    echo "* Installing CMSmap to /opt/CMSmap/cmsmap.py *"
-    echo "**********************************************"
-    echo ""
-    cd /opt/
-    git clone https://github.com/Dionach/CMSmap.git
-    cd CMSmap
-    pip3 install .
-    echo "y" | cmsmap -U P
-else
-    echo ""
-    echo "**********************************************"
-    echo "*           Updating CMSmap                  *"
-    echo "**********************************************"
-    echo ""
-    cd /opt/CMSmap
-    git pull
-    pip3 install .
-    echo "y" | cmsmap -U P
-fi
+#if [ ! -f /opt/CMSmap/cmsmap.py ]; then
+#    echo ""
+#    echo "**********************************************"
+#    echo "* Installing CMSmap to /opt/CMSmap/cmsmap.py *"
+#    echo "**********************************************"
+#    echo ""
+#    cd /opt/
+#    git clone https://github.com/Dionach/CMSmap.git
+#    cd CMSmap
+#    pip3 install .
+#    echo "y" | cmsmap -U P
+#else
+#    echo ""
+#    echo "**********************************************"
+#    echo "*           Updating CMSmap                  *"
+#    echo "**********************************************"
+#    echo ""
+#    cd /opt/CMSmap
+#    git pull
+#    pip3 install .
+#    echo "y" | cmsmap -U P
+#fi
 
 cd $CELERYSTALK_DIR
 cp bash_completion_file /etc/bash_completion.d/celerystalk.sh
