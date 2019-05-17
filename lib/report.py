@@ -358,7 +358,7 @@ function myFunction() {
     print("\n")
     print("*" * terminal_width)
     banner = "Combined Report files"
-    print(" " * ((terminal_width / 2) - (len(banner) / 2)) + banner )
+    print(" " * ( int(terminal_width / 2) - int(len(banner) / 2)) + banner )
     print("*" * terminal_width + "\n")
 
     print("[+] Report file (All workspace hosts): {0} (has screenshots!!!)".format(combined_report_file_name))
@@ -366,7 +366,7 @@ function myFunction() {
 
     print("*" * terminal_width)
     banner = "Suggestions for viewing your html report:"
-    print(" " * ((terminal_width / 2) - (len(banner) / 2)) + banner )
+    print(" " * (int(terminal_width / 2) - int(len(banner) / 2)) + banner )
     print("*" * terminal_width + "\n")
     print("[+] Option 1: Open with local firefox (works over ssh with x forwarding)")
     print("\t\tfirefox " + combined_report_file_name + " &")

@@ -329,15 +329,15 @@ def get_terminal_width():
     :return: the current width of the terminal
     """
     command = ['tput', 'cols']
+    width = 80
     try:
         width = int(subprocess.check_output(command))
     except OSError as e:
         print("Invalid Command '{0}': exit status ({1})".format(
               command[0], e.errno))
-        width = 20
+
     except subprocess.CalledProcessError as e:
         print("Command '{0}' returned non-zero exit status: ({1})".format(
               command, e.returncode))
-        width = 20
-    finally:
+    else: ## finnaly
         return width

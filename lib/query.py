@@ -25,8 +25,8 @@ def query_sqlite(workspace, target=None, repeat=None, summary=None):
         loadavg = float('0.00')
     banner = "celerystalk Status | Workspace Name: {0}  | CPU Load Avg: {1}".format(workspace, str(loadavg))
     print("*" * terminal_width)
-    print(" " * ((terminal_width / 2) - (len(banner) / 2)) + banner)
-    print("\n" + " " * ((terminal_width / 2) - 40) + "Submitted: {0} | Queued: {3} | Running: {2} | Completed: {1}  | Cancelled: {4}  | Paused: {5}".format(total_count[0][0], completed_count[0][0], len(running_rows), pending_count[0][0], len(cancelled_rows), len(paused_rows)))
+    print(" " * ( int(terminal_width / 2) - int(len(banner) / 2)) + banner)
+    print("\n" + " " * ( int(terminal_width / 2) - 40) + "Submitted: {0} | Queued: {3} | Running: {2} | Completed: {1}  | Cancelled: {4}  | Paused: {5}".format(total_count[0][0], completed_count[0][0], len(running_rows), pending_count[0][0], len(cancelled_rows), len(paused_rows)))
     print("*" * terminal_width)
 
     if summary:
