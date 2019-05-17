@@ -6,7 +6,7 @@ from libnmap.process import NmapProcess
 from libnessus.parser import NessusParser
 from netaddr import IPAddress, IPRange, IPNetwork
 import socket
-import db
+from . import db
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import WebDriverException
@@ -306,7 +306,7 @@ def check_for_new_default_config():
     if user_config_age < default_config_age:
         print("[!] [config_default.ini] from the repo is newer than the the current [config.ini] file.")
         print("[!] This is most likely because a new tool or possibly a new feature has been added.\n")
-        answer = input("[+] Would you like backup your current config and replace [config.ini] with the new version? (y\N)")
+        answer = input("[+] Would you like backup your current config and replace [config.ini] with the new version? (y|N)")
         print("")
         if (answer == "Y") or (answer == "y"):
             from shutil import copyfile

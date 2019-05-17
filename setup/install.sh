@@ -38,10 +38,26 @@ echo "*  Installing redis-server, gobuster, seclists, *"
 echo "*  firefox-esr, xvfb, python3-pip, wpscan, jq   *"
 echo "*************************************************"
 echo ""
+
 if [ "$DISTRO" == "kali" ]; then
     apt install gobuster redis-server seclists firefox-esr xvfb python3-pip wpscan jq -y
 elif [ "$DISTRO" == "ubuntu" ]; then
-    apt install python-pip python3-pip unzip redis-server firefox xvfb jq -y
+    mv /etc/apt/sources.list /etc/apt/sources.list.bak && cat > /etc/apt/sources.list <<- EOF
+deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+EOF
+    apt install python-pip unzip redis-server firefox xvfb jq curl -y
+    apt-get install software-properties-common && add-apt-repository ppa:jonathonf/python-3.6 && \
+    apt-get -y update && apt-get install python-3.6 -y && \
+    apt-get install -y python3-pip
 fi
 
 CELERYSTALK_DIR=`pwd`
@@ -82,14 +98,14 @@ if [ ! -f /usr/bin/geckodriver ]; then
       wget https://github.com/mozilla/geckodriver/releases/download/v0.22.0/geckodriver-v0.22.0-linux64.tar.gz
       tar -xvf geckodriver-v0.22.0-linux64.tar.gz
       rm geckodriver-v0.22.0-linux64.tar.gz
-      mv geckodriver /usr/sbin
-      ln -s /usr/sbin/geckodriver /usr/bin/geckodriver
+      mv geckodriver /usr/sin
+      #ln -s /usr/sbin/geckodriver /usr/bin/geckodriver
     else
       wget https://github.com/mozilla/geckodriver/releases/download/v0.22.0/geckodriver-v0.22.0-linux32.tar.gz
       tar -xvf geckodriver-v0.22.0-linux32.tar.gz
       rm geckodriver-v0.22.0-linux64.tar.gz
-      mv geckodriver /usr/sbin
-      ln -s /usr/sbin/geckodriver /usr/bin/geckodriver
+      mv geckodriver /usr/bin
+      ln -s /usr/bin/geckodriver /usr/bin/geckodriver
     fi
 
     # https://gist.github.com/cgoldberg/4097efbfeb40adf698a7d05e75e0ff51#file-geckodriver-install-sh
@@ -135,9 +151,7 @@ if [ ! -f /opt/Sublist3r/sublist3r.py ]; then
     echo "*******************************************************"
     echo ""
 
-    cd /opt/
-    git clone https://github.com/aboul3la/Sublist3r.git
-    cd Sublist3r/
+    cd /opt/ && git clone https://github.com/aboul3la/Sublist3r.git && cd Sublist3r/
     pip install -r requirements.txt --index-url ${PIP_SOURCE}
 else
     echo ""
@@ -145,9 +159,7 @@ else
     echo "*           Updating sublist3r               *"
     echo "**********************************************"
     echo ""
-    cd /opt/Sublist3r/
-    git pull
-    pip install -r requirements.txt --index-url ${PIP_SOURCE}
+    cd /opt/Sublist3r/ && git pull && pip install -r requirements.txt --index-url ${PIP_SOURCE}
 fi
 
 if [ ! -f /opt/Photon/photon.py ]; then
@@ -156,9 +168,7 @@ if [ ! -f /opt/Photon/photon.py ]; then
     echo "* Installing Photon to /opt/Photon/photon.py *"
     echo "**********************************************"
     echo ""
-    cd /opt/
-    git clone https://github.com/s0md3v/Photon.git
-    cd Photon
+    cd /opt/ && git clone https://github.com/s0md3v/Photon.git && cd Photon && \
     pip install -r requirements.txt --index-url ${PIP_SOURCE}
 else
     echo ""
@@ -166,8 +176,7 @@ else
     echo "*           Updating Photon                  *"
     echo "**********************************************"
     echo ""
-    cd /opt/Photon
-    git pull
+    cd /opt/Photon && git pull && \
     pip install -r requirements.txt --index-url ${PIP_SOURCE}
 fi
 
@@ -194,8 +203,7 @@ fi
 #    echo "y" | cmsmap -U P
 #fi
 
-cd $CELERYSTALK_DIR
-cp bash_completion_file /etc/bash_completion.d/celerystalk.sh
+cd $CELERYSTALK_DIR && cp bash_completion_file /etc/bash_completion.d/celerystalk.sh
 cd .. && ./celerystalk -h
 echo ""
 echo "[+] Back up a directory and you are ready to go."

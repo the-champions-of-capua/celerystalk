@@ -1,5 +1,5 @@
 import sys
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 from celery import chain
 from kombu import uuid
 

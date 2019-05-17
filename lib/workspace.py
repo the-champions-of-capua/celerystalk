@@ -23,7 +23,7 @@ def create_workspace(workspace,arguments):
             arg_output_dir = os.path.join(arguments["-o"], '')
             if arg_output_dir != output_dir:  # if the user specified output dir is not the same as the db output_dir, ask the user whether they want to update it or ignore the command line output_dir
                 output_dir_answer = input(
-                    "[!] The DB shows that the output directory for the [{0}] workspace is [{1}].\n[+] Do you want to update the output directory to [{2}]? (y\N)".format(
+                    "[!] The DB shows that the output directory for the [{0}] workspace is [{1}].\n[+] Do you want to update the output directory to [{2}]? (y\\N)".format(
                         workspace, output_dir, arg_output_dir))
                 print("")
                 if (output_dir_answer == "Y") or (

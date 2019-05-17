@@ -1,7 +1,6 @@
 import simplejson
 from collections import OrderedDict
-from ConfigParser import ConfigParser
-
+from configparser import ConfigParser
 
 class MultiOrderedDict(OrderedDict):
     '''Taken from: https://stackoverflow.com/questions/15848674/how-to-configparse-a-file-keeping-multiple-values-for-identical-keys'''
