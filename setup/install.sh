@@ -116,7 +116,7 @@ if [ ! -f /opt/amass/amass ]; then
     echo "****************************************"
     echo ""
     mkdir -p /opt/amass
-    wget https://github.com/OWASP/Amass/releases/download/v2.5.0/amass_2.5.2_linux_386.zip -O /opt/amass/amass_2.5.2_linux_386.zip
+    wget https://github.com/OWASP/Amass/releases/download/2.9.11/amass_2.9.11_linux_amd64.zip -O /opt/amass/amass_2.5.2_linux_386.zip
     unzip /opt/amass/amass_2.5.2_linux_386.zip -d /opt/amass
 fi
 

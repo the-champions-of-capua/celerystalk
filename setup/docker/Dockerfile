@@ -25,7 +25,7 @@ RUN rm /usr/bin/python3 && ln -sn /usr/bin/python3.6 /usr/bin/python3
 RUN cd ${WORKDIR} && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && python get-pip.py
 
 RUN apt-get update -qq && apt-get install -y nmap redis-server
-RUN pip install
+RUN pip install six --upgrade --ignore-installed six
 
 RUN cd ${WORKDIR} && git clone https://github.com/the-champions-of-capua/celerystalk \
  && cd celerystalk/setup && ./install.sh

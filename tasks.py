@@ -8,10 +8,7 @@ from lib import db
 from lib import utils
 import lib.scan
 import simplejson
-try:
-    import urlparse
-except:
-    import urllib.parse as urlparse
+import urllib.parse as urlparse
 import os.path
 from celery.utils import uuid
 import os
